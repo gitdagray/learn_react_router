@@ -1,10 +1,9 @@
-const Footer = () => {
-    const today = new Date();
-    return (
-        <footer className='Footer'>
-            <p>Copyright &copy; {today.getFullYear()}</p>
-        </footer>
-    )
-}
+const Footer = ({ hive }) => {
+  return (
+    <footer className="Footer">
+      <p>Kosnica br: {hive} od ukupno {localStorage.length}</p>
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

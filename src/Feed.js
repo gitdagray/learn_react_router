@@ -1,13 +1,13 @@
-import Post from './Post';
+import Pregled from "./Pregled";
 
-const Feed = ({ posts }) => {
-    return (
-        <>
-            {posts.map(post => (
-                <Post key={post.id} post={post} />
-            ))}
-        </>
-    )
-}
+const Feed = ({ pregledi }) => {
+  return (
+    <>
+      {pregledi.map((pregled) => (
+        <Pregled key={pregled.id} pregled={pregled} />
+      ))}
+    </>
+  );
+};
 
-export default Feed
+export default Feed;

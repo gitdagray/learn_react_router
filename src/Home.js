@@ -1,17 +1,15 @@
-import Feed from './Feed';
+import Feed from "./Feed";
 
-const Home = ({ posts }) => {
-    return (
-        <main className="Home">
-            {posts.length ? (
-                <Feed posts={posts} />
-            ) : (
-                <p style={{ marginTop: "2rem" }}>
-                    No posts to display.
-                </p>
-            )}
-        </main>
-    )
-}
+const Home = ({ pregledi }) => {
+  return (
+    <main className="Home">
+      {pregledi.length ? (
+        <Feed pregledi={pregledi} />
+      ) : (
+        <p style={{ marginTop: "2rem" }}>Nema pregleda za ovu kosnicu.</p>
+      )}
+    </main>
+  );
+};
 
-export default Home
+export default Home;

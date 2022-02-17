@@ -1,15 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Missing = () => {
-    return (
-        <main className='Missing'>
-            <h2>Page Not Found</h2>
-            <p>Well, that's disappointing.</p>
-            <p>
-                <Link to='/'>Visit Our Homepage</Link>
-            </p>
-        </main>
-    )
-}
+  return (
+    <main className="Missing">
+      <h2>Nemate takvu kosnicu</h2>
+      <p>Kreirajte novu.</p>
+      <p>
+        <Link to="/Add">Kreiraj novu kosnicu</Link>
+      </p>
+    </main>
+  );
+};
 
-export default Missing
+export default Missing;

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 * {
   margin: 0;
@@ -12,7 +12,7 @@ html {
 
 body {
   min-height: 100vh;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
@@ -38,9 +38,10 @@ body {
   box-shadow: 0px 0px 15px gray;
 }
 
-.Header, .Footer {
+.Header,
+.Footer {
   width: 100%;
-  background-color: #66d8f5;
+  background-color: goldenrod;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
@@ -59,6 +60,8 @@ body {
   padding: 0.75rem;
   display: grid;
   place-content: center;
+  font-size: larger;
+  font-weight: bolder;
 }
 
 .Nav {
@@ -76,7 +79,7 @@ body {
 }
 
 .searchForm input[type="text"] {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   width: 100%;
   min-height: 48px;
   font-size: 1rem;
@@ -102,7 +105,7 @@ body {
   padding: 1rem;
 }
 
-.Nav li:hover, 
+.Nav li:hover,
 .Nav li:focus {
   padding: 1rem;
 }
@@ -112,20 +115,24 @@ body {
   text-decoration: none;
 }
 
-.Nav li:hover, 
-.Nav li:focus, 
-.Nav li:hover a, 
-.Nav li:focus a  {
+.Nav li:hover,
+.Nav li:focus,
+.Nav li:hover a,
+.Nav li:focus a {
   background-color: #eee;
   color: #333;
 }
 
-.Nav li:hover a, 
+.Nav li:hover a,
 .Nav li:focus a {
   cursor: pointer;
 }
 
-.Home, .NewPost, .PostPage, .About, .Missing {
+.Home,
+.NoviPregled,
+.PregledPage,
+.Add,
+.Missing {
   width: 100%;
   flex-grow: 1;
   padding: 1rem;
@@ -133,50 +140,50 @@ body {
   background-color: #fff;
 }
 
-.post {
+.pregled {
   margin-top: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid lightgray;
 }
 
-.Home .post a {
+.Home .pregled a {
   text-decoration: none;
 }
 
-.Home .post a, 
-.Home .post a:visited {
+.Home .pregled a,
+.Home .pregled a:visited {
   color: #000;
 }
 
-.post:first-child {
+.pregled:first-child {
   margin-top: 0;
 }
 
-.post:last-child {
+.pregled:last-child {
   border-bottom: none;
 }
 
-.postDate {
+.pregledDate {
   font-size: 0.75rem;
   margin-top: 0.25rem;
 }
 
-.postBody {
+.pregledBody {
   margin: 1rem 0;
 }
 
-.newPostForm {
+.noviPregledForm {
   display: flex;
   flex-direction: column;
 }
 
-.newPostForm label {
+.noviPregledForm label {
   margin-top: 1rem;
 }
 
-.newPostForm input[type='text'], 
-.newPostForm textarea {
-  font-family: 'Open Sans', sans-serif;
+.noviPregledForm input[type="text"],
+.noviPregledForm textarea {
+  font-family: "Open Sans", sans-serif;
   width: 100%;
   min-height: 48px;
   font-size: 1rem;
@@ -185,12 +192,23 @@ body {
   margin-right: 0.25rem;
   outline: none;
 }
+.searchHive {
+  font-family: "Open Sans", sans-serif;
+  width: 20%;
+  min-height: 48px;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  margin-right: 0.25rem;
+  outline: none;
+}
 
-.newPostForm textarea {
+.noviPregledForm textarea {
   height: 100px;
 }
 
-.newPostForm button {
+.noviPregledForm button {
   margin-top: 1rem;
   height: 48px;
   min-width: 48px;
@@ -200,20 +218,11 @@ body {
   cursor: pointer;
 }
 
-.Missing h2, .PostPage h2, 
-.Missing p, .PostPage p {
+.Missing h2,
+.PregledPage h2,
+.Missing p,
+.PregledPage p {
   margin-bottom: 1rem;
-}
-
-.PostPage button {
-  height: 48px;
-  min-width: 48px;
-  border-radius: 0.25rem;
-  padding: 0.5rem;
-  font-size: 1rem;
-  background-color: red;
-  color: #fff;
-  cursor: pointer;
 }
 
 .statusMsg {
@@ -240,32 +249,30 @@ body {
     text-align: right;
   }
 
-  .Nav li:hover, 
-  .Nav li:focus, 
-  .Nav li:hover a, 
-  .Nav li:focus a  {
+  .Nav li:hover,
+  .Nav li:focus,
+  .Nav li:hover a,
+  .Nav li:focus a {
     background-color: #eee;
     color: #333;
   }
 
   .searchForm {
     width: 50%;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
   }
- 
+
   .searchForm input[type="text"] {
     margin-left: 0.5rem;
   }
 
-  .newPostForm textarea {
+  .noviPregledForm textarea {
     height: 300px;
   }
 }
 
 @media only screen and (min-width: 992px) {
-
   .Header svg {
     font-size: 3rem;
   }
-
 }

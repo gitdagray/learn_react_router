@@ -1,98 +1,130 @@
-import Header from './Header';
-import Nav from './Nav';
-import Footer from './Footer';
-import Home from './Home';
-import NewPost from './NewPost';
-import PostPage from './PostPage';
-import About from './About';
-import Missing from './Missing';
-import { Route, Switch, useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { format } from 'date-fns';
+import Header from "./Header";
+import Nav from "./Nav";
+import Footer from "./Footer";
+import Home from "./Home";
+import NoviPregled from "./NoviPregled";
+import PregledPage from "./PregledPage";
+import Add from "./Add";
+import Missing from "./Missing";
+import { Route, Switch, useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { format } from "date-fns";
 
 function App() {
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      title: "My First Post",
-      datetime: "July 01, 2021 11:17:36 AM",
-      body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
-    },
-    {
-      id: 2,
-      title: "My 2nd Post",
-      datetime: "July 01, 2021 11:17:36 AM",
-      body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
-    },
-    {
-      id: 3,
-      title: "My 3rd Post",
-      datetime: "July 01, 2021 11:17:36 AM",
-      body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
-    },
-    {
-      id: 4,
-      title: "My Fourth Post",
-      datetime: "July 01, 2021 11:17:36 AM",
-      body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis consequatur expedita, assumenda similique non optio! Modi nesciunt excepturi corrupti atque blanditiis quo nobis, non optio quae possimus illum exercitationem ipsa!"
-    }
-  ])
-  const [search, setSearch] = useState('');
+  const [hive, setHive] = useState("");
+  const [pregledi, setPregledi] = useState([]);
+  const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [postTitle, setPostTitle] = useState('');
-  const [postBody, setPostBody] = useState('');
+  const [pregledTitle, setPregledTitle] = useState("");
+  const [pregledBody, setPregledBody] = useState("");
   const history = useHistory();
 
   useEffect(() => {
-    const filteredResults = posts.filter((post) =>
-      ((post.body).toLowerCase()).includes(search.toLowerCase())
-      || ((post.title).toLowerCase()).includes(search.toLowerCase()));
+    const filteredResults = pregledi.filter(
+      (pregled) =>
+        pregled.body.toLowerCase().includes(search.toLowerCase()) ||
+        pregled.title.toLowerCase().includes(search.toLowerCase())
+    );
 
     setSearchResults(filteredResults.reverse());
-  }, [posts, search])
+  }, [pregledi, search]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
-    const datetime = format(new Date(), 'MMMM dd, yyyy pp');
-    const newPost = { id, title: postTitle, datetime, body: postBody };
-    const allPosts = [...posts, newPost];
-    setPosts(allPosts);
-    setPostTitle('');
-    setPostBody('');
-    history.push('/');
-  }
+    const id = pregledi.length ? pregledi[pregledi.length - 1].id + 1 : 1;
+    const datetime = format(new Date(), "MMMM dd, yyyy pp");
+    const noviPregled = {
+      id,
+      title: pregledTitle,
+      datetime,
+      body: pregledBody,
+    };
+    const allPregledi = [...pregledi, noviPregled];
+    setPregledi(allPregledi);
+    localStorage.setItem(hive, JSON.stringify(allPregledi));
+    setPregledTitle("");
+    setPregledBody("");
+    history.push("/");
+  };
 
-  const handleDelete = (id) => {
-    const postsList = posts.filter(post => post.id !== id);
-    setPosts(postsList);
-    history.push('/');
-  }
+  const handleNewSubmit = (e) => {
+    e.preventDefault();
+    const newHiveNo = localStorage.length + 1;
+    const id = 1;
+    const datetime = format(new Date(), "MMMM dd, yyyy pp");
+    let allNew = [];
+    const newHive = {
+      id,
+      title: pregledTitle,
+      datetime,
+      body: pregledBody,
+    };
+    allNew[0] = newHive;
+    setPregledTitle("");
+    setPregledBody("");
+    history.push("/");
+
+    localStorage.setItem(newHiveNo, JSON.stringify(allNew));
+  };
+
+  const handleHive = (h) => {
+    if (JSON.parse(localStorage.getItem(h))) {
+      setPregledi(JSON.parse(localStorage.getItem(h)));
+      setHive(h);
+    } else {
+      setPregledi([]);
+      setHive("");
+    }
+  };
+
+  const handleSave = () => {
+    if (hive) {
+      localStorage.setItem(hive, JSON.stringify(pregledi));
+      handleHive("");
+    }
+  };
 
   return (
     <div className="App">
-      <Header title="React JS Blog" />
+      <Header
+        title="Evidencija kosnice br: "
+        hive={hive}
+        handleHive={handleHive}
+        handleSave={handleSave}
+      />
       <Nav search={search} setSearch={setSearch} />
       <Switch>
         <Route exact path="/">
-          <Home posts={searchResults} />
+          <Home pregledi={searchResults} />
         </Route>
-        <Route exact path="/post">
-          <NewPost
-            handleSubmit={handleSubmit}
-            postTitle={postTitle}
-            setPostTitle={setPostTitle}
-            postBody={postBody}
-            setPostBody={setPostBody}
+        <Route exact path="/pregled">
+          {hive ? (
+            <NoviPregled
+              handleSubmit={handleSubmit}
+              pregledTitle={pregledTitle}
+              setPregledTitle={setPregledTitle}
+              pregledBody={pregledBody}
+              setPregledBody={setPregledBody}
+            />
+          ) : (
+            <Route path="*" component={Missing} />
+          )}
+        </Route>
+        <Route path="/pregled/:id">
+          <PregledPage pregledi={pregledi} />
+        </Route>
+        <Route path="/add">
+          <Add
+            handleNewSubmit={handleNewSubmit}
+            pregledTitle={pregledTitle}
+            setPregledTitle={setPregledTitle}
+            pregledBody={pregledBody}
+            setPregledBody={setPregledBody}
           />
         </Route>
-        <Route path="/post/:id">
-          <PostPage posts={posts} handleDelete={handleDelete} />
-        </Route>
-        <Route path="/about" component={About} />
         <Route path="*" component={Missing} />
       </Switch>
-      <Footer />
+      <Footer hive={hive} />
     </div>
   );
 }
